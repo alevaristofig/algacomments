@@ -1,5 +1,6 @@
 package com.algacomments.api.model;
 
+import io.hypersistence.tsid.TSID;
 import lombok.Builder;
 import lombok.Data;
 
@@ -7,7 +8,7 @@ import lombok.Data;
 @Builder
 public class CommentOutput {
 
-	private String text;
-	
+	private TSID id;
+	private String text;	
 	private String author;
 }
