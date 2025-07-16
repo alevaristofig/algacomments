@@ -1,7 +1,8 @@
 spring:
   application:
     name: "algacomments"
-  /*data:
-    redis:
-      host: localhost
-      port: 6379*/
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq

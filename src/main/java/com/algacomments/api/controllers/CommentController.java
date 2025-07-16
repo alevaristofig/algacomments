@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.algacomments.api.common.IDGenerator;
 import com.algacomments.api.model.CommentOutput;
@@ -22,6 +23,11 @@ public class CommentController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CommentOutput create(@RequestBody CommentOutput input) {
+		
+		if(input.getAuthor() == null || input.getAuthor().isBlank() ||
+		   input.getText() == null || input.getAuthor().isBlank()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
 		
 		Comment comment = Comment.builder()
 				.id(new CommentId(IDGenerator.generateTSID()))
