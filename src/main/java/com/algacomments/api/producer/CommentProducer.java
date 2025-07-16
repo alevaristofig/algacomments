@@ -1,6 +1,7 @@
 package com.algacomments.api.producer;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Service;
 
 import com.algacomments.domain.model.Comment;
 import com.algacomments.infrastruct.rabbitmq.RabbitMQConfig;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
+@Service
 public class CommentProducer {
 	
 	private final RabbitTemplate rabbitTemplate;

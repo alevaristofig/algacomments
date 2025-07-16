@@ -1,5 +1,6 @@
 package com.algacomments.api.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +11,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.algacomments.api.common.IDGenerator;
 import com.algacomments.api.model.CommentOutput;
+import com.algacomments.api.producer.CommentProducer;
 import com.algacomments.domain.model.Comment;
 import com.algacomments.domain.model.CommentId;
+import com.algacomments.domain.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,10 +22,13 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/comments")
 @RequiredArgsConstructor
 public class CommentController {
+	
+	@Autowired
+	private CommentService service;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CommentOutput create(@RequestBody CommentOutput input) {
+	public void create(@RequestBody CommentOutput input) {
 		
 		if(input.getAuthor() == null || input.getAuthor().isBlank() ||
 		   input.getText() == null || input.getAuthor().isBlank()) {
@@ -35,7 +41,7 @@ public class CommentController {
 				.author(input.getAuthor())
 				.build();
 		
-		return convertToModel(comment);
+		service.notificar(comment);
 	}
 	
 	private CommentOutput convertToModel(Comment comment) {
