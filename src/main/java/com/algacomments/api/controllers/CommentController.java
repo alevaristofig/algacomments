@@ -11,7 +11,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.algacomments.api.common.IDGenerator;
 import com.algacomments.api.model.CommentOutput;
-import com.algacomments.api.producer.CommentProducer;
 import com.algacomments.domain.model.Comment;
 import com.algacomments.domain.model.CommentId;
 import com.algacomments.domain.service.CommentService;
@@ -41,7 +40,7 @@ public class CommentController {
 				.author(input.getAuthor())
 				.build();
 		
-		service.notificar(comment);
+		
 	}
 	
 	private CommentOutput convertToModel(Comment comment) {
