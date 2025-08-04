@@ -19,7 +19,7 @@ public class CommentMonitoringClientImpl implements CommentMonitoringClient {
 	}
 
 	@Override
-	public CommentModeratedOutuput monitore(CommentInput input) {
+	public CommentModeratedOutuput moderated(CommentInput input) {
 		return restClient.post()
 					.uri("/api/moderate")
 					.contentType(MediaType.APPLICATION_JSON)

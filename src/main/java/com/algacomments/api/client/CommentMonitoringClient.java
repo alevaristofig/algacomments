@@ -11,5 +11,5 @@ import com.algacomments.api.model.CommentOutput;
 public interface CommentMonitoringClient {
 
 	@PostExchange
-	CommentModeratedOutuput monitore(CommentInput input);
+	CommentModeratedOutuput moderated(CommentInput input);
 }
