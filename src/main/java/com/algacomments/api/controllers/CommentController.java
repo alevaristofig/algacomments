@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.algacomments.api.common.IDGenerator;
 import com.algacomments.api.model.CommentModeratedOutuput;
 import com.algacomments.api.model.CommentOutput;
+import com.algacomments.domain.exception.ModerationRejectedException;
 import com.algacomments.domain.model.Comment;
 import com.algacomments.domain.model.CommentId;
 import com.algacomments.domain.service.CommentService;
@@ -51,6 +52,8 @@ public class CommentController {
 		
 		if(response.getApproved()) {			
 			service.salvar(comment);
+		} else {
+			throw new ModerationRejectedException(response.getReason());
 		}
 		
 		return response;
@@ -64,13 +67,10 @@ public class CommentController {
 	@GetMapping("/{id}")
 	public CommentOutput buscar(@PathVariable("id") String id) {
 		
-		Optional<Comment> comment = service.buscar(id);
+		Comment comment = service.buscar(id);
 		
-		if(comment.isPresent()) {			
-			return convertToModel(comment.get());			
-		}
+		return convertToModel(comment);
 		
-		return null;
 	}
 	
 	@DeleteMapping("/{id}")

@@ -11,6 +11,7 @@ import com.algacomments.api.model.CommentCollection;
 import com.algacomments.api.model.CommentInput;
 import com.algacomments.api.model.CommentModeratedOutuput;
 import com.algacomments.api.model.CommentModerationInput;
+import com.algacomments.domain.exception.CommentNotFoundException;
 import com.algacomments.domain.model.Comment;
 import com.algacomments.domain.model.CommentId;
 import com.algacomments.domain.repository.CommentRepository;
@@ -43,8 +44,8 @@ public class CommentService {
 		return (List<Comment>) repository.findAll();
 	}
 	
-	public Optional<Comment> buscar(String id) {
-		return repository.findById(id);
+	public Comment buscar(String id) {
+		return repository.findById(id).orElseThrow(CommentNotFoundException::new);
 	}
 	
 	public void deletar(String id) {
