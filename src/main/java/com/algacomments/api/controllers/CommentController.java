@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.algacomments.api.common.IDGenerator;
+import com.algacomments.api.model.CommentModeratedOutuput;
 import com.algacomments.api.model.CommentOutput;
 import com.algacomments.domain.model.Comment;
 import com.algacomments.domain.model.CommentId;
@@ -27,7 +28,7 @@ public class CommentController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void create(@RequestBody CommentOutput input) {
+	public CommentModeratedOutuput create(@RequestBody CommentOutput input) {
 		
 		if(input.getAuthor() == null || input.getAuthor().isBlank() ||
 		   input.getText() == null || input.getAuthor().isBlank()) {
@@ -40,7 +41,13 @@ public class CommentController {
 				.author(input.getAuthor())
 				.build();
 		
+		CommentModeratedOutuput response = service.moderar(comment);
 		
+		if(response.getApproved()) {			
+			service.salvar(comment);
+		}
+		
+		return response;
 	}
 	
 	private CommentOutput convertToModel(Comment comment) {

@@ -8,6 +8,7 @@ import com.algacomments.api.client.CommentMonitoringClient;
 import com.algacomments.api.client.RestClientFactory;
 import com.algacomments.api.model.CommentInput;
 import com.algacomments.api.model.CommentModeratedOutuput;
+import com.algacomments.api.model.CommentModerationInput;
 
 @Component
 public class CommentMonitoringClientImpl implements CommentMonitoringClient {
@@ -19,7 +20,7 @@ public class CommentMonitoringClientImpl implements CommentMonitoringClient {
 	}
 
 	@Override
-	public CommentModeratedOutuput moderated(CommentInput input) {
+	public CommentModeratedOutuput moderated(CommentModerationInput input) {
 		return restClient.post()
 					.uri("/api/moderate")
 					.contentType(MediaType.APPLICATION_JSON)
