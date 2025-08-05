@@ -46,4 +46,8 @@ public class CommentService {
 	public Optional<Comment> buscar(String id) {
 		return repository.findById(id);
 	}
+	
+	public void deletar(String id) {
+		repository.deleteById(id);
+	}
 }
