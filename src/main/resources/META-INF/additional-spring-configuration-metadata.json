@@ -13,5 +13,25 @@
     "name": "spring.spring.redis.password",
     "type": "java.lang.String",
     "description": "A description for 'spring.spring.redis.password'"
+  },
+  {
+    "name": "spring.spring.data.redis",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.spring.data.redis'"
+  },
+  {
+    "name": "spring.spring.data.host",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.spring.data.host'"
+  },
+  {
+    "name": "spring.spring.data.port",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.spring.data.port'"
+  },
+  {
+    "name": "spring.spring.data.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.spring.data.password'"
   }
 ]}

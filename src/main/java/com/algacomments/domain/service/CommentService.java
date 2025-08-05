@@ -29,15 +29,7 @@ public class CommentService {
 		return client.moderated(commentInput);		
 	}
 	
-	public void salvar(Comment comment) {
-		//CommentCollection commentCollection = new CommentCollection();
-		
-		//commentCollection.setId(comment.getId().getValue().toString());
-		//commentCollection.setText(comment.getText());
-		//commentCollection.setAuthor(comment.getAuthor());
-		
-		//comment.setId(comment.getId().getValue());
-		
+	public void salvar(Comment comment) {		
 		repository.save(comment);
 	}
 
