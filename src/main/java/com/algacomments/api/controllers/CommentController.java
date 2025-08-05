@@ -1,7 +1,12 @@
 package com.algacomments.api.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +53,23 @@ public class CommentController {
 		}
 		
 		return response;
+	}
+	
+	@GetMapping
+	public List<Comment> listar() {
+		return service.listar();
+	}
+	
+	@GetMapping("/{id}")
+	public CommentOutput buscar(@PathVariable("id") String id) {
+		
+		Optional<Comment> comment = service.buscar(id);
+		
+		if(comment.isPresent()) {			
+			return convertToModel(comment.get());			
+		}
+		
+		return null;
 	}
 	
 	private CommentOutput convertToModel(Comment comment) {

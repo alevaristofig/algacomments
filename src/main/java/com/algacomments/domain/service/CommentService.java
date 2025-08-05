@@ -1,5 +1,8 @@
 package com.algacomments.domain.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +12,10 @@ import com.algacomments.api.model.CommentInput;
 import com.algacomments.api.model.CommentModeratedOutuput;
 import com.algacomments.api.model.CommentModerationInput;
 import com.algacomments.domain.model.Comment;
+import com.algacomments.domain.model.CommentId;
 import com.algacomments.domain.repository.CommentRepository;
+
+import io.hypersistence.tsid.TSID;
 
 @Service
 public class CommentService {
@@ -32,5 +38,12 @@ public class CommentService {
 	public void salvar(Comment comment) {		
 		repository.save(comment);
 	}
-
+	
+	public List<Comment> listar() {
+		return (List<Comment>) repository.findAll();
+	}
+	
+	public Optional<Comment> buscar(String id) {
+		return repository.findById(id);
+	}
 }
